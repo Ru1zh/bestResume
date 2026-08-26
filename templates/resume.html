@@ -1,0 +1,357 @@
+﻿{% macro entry_block(item, underlined=false) %}
+<article class="block">
+  <div class="entry-heading">
+    <span class="entry-title{% if underlined %} u{% endif %}">
+      {% if item.url %}<a href="{{ item.url }}" target="_blank" rel="noreferrer"
+        >{{ item.name }}</a
+      >{% else %}{{ item.name }}{% endif %}
+    </span>
+    <span class="entry-date">{{ item.date }}</span>
+  </div>
+  {% if item.company or item.role %}
+  <div class="entry-meta">
+    <span class="entry-company">{{ item.company }}</span>
+    <span class="entry-role">{{ item.role }}</span>
+  </div>
+  {% endif %} {% if item.subtitle %}
+  <p class="entry-subtitle">{{ item.subtitle }}</p>
+  {% endif %} {% if item.description %}
+  <p class="entry-desc">{{ item.description }}</p>
+  {% endif %} {% if item.highlights %}
+  <ul>
+    {% for h in item.highlights %}
+    <li>{{ h }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %} {% if item.tech_stack %}
+  <p class="tech-stack">
+    <strong>{{ labels.tech_stack }}：</strong>{{ item.tech_stack }}
+  </p>
+  {% endif %}
+</article>
+{% endmacro %}
+
+<!doctype html>
+<html lang="{{ lang }}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ basics.name }} - {{ labels.resume }}</title>
+    <link rel="stylesheet" href="/static/style.css?v=13" />
+  </head>
+  <body>
+    <div class="print-bar no-print">
+      <button
+        id="exportBtn"
+        data-default-label="{{ labels.export_pdf }}"
+        data-generating-label="{{ labels.generating }}"
+      >
+        {{ labels.export_pdf }}
+      </button>
+      <a href="/editor?lang={{ lang }}"{% if editor_context %} target="_top"{% endif %}>{{ labels.edit_yaml }}</a>
+      <span class="language-links"
+        >{% if editor_context %}<a href="/editor?lang=en" target="_top">EN</a> /
+        <a href="/editor?lang=zh" target="_top">中文</a>{% else %}<a
+          href="/resume?lang=en"
+          >EN</a
+        > /
+        <a href="/resume?lang=zh">中文</a>{% endif %}</span
+      >
+    </div>
+
+    <main class="page">
+      <header class="header">
+        <div class="header-info">
+          <h1>{{ basics.name }}</h1>
+          <p class="school">{{ basics.school }}</p>
+          {% if basics.position %}
+          <p class="position">{{ labels.position }}：{{ basics.position }}</p>
+          {% endif %}
+          <p class="contact">
+            {{ labels.telephone }}：{{ basics.phone }} | {{ labels.email }}：<a
+              href="mailto:{{ basics.email }}"
+              >{{ basics.email }}</a
+            >
+          </p>
+          {% if basics.linkedin %}
+          <p class="contact">
+            {{ labels.linkedin }}：<a
+              href="{{ basics.linkedin }}"
+              target="_blank"
+              rel="noreferrer"
+              >{{ basics.linkedin }}</a
+            >
+          </p>
+          {% endif %}
+          {% if basics.github or basics.homepage %}
+          <p class="contact">
+            {% if basics.github %}{{ labels.github }}：<a
+              href="{{ basics.github }}"
+              target="_blank"
+              rel="noreferrer"
+              >{{ basics.github }}</a
+            >{% endif %}{% if basics.github and basics.homepage %} | {% endif
+            %}{% if basics.homepage %}{{ labels.homepage }}：<a
+              href="{{ basics.homepage }}"
+              target="_blank"
+              rel="noreferrer"
+              >{{ basics.homepage }}</a
+            >{% endif %}
+          </p>
+          {% endif %}
+        </div>
+        {% if basics.photo %}
+        <div class="header-photo">
+          <img src="{{ basics.photo }}" alt="{{ basics.name }} photo" />
+        </div>
+        {% endif %}
+      </header>
+
+      {% if education %}
+      <section>
+        <h2>{{ labels.education }}</h2>
+        {% for edu in education %}
+        <div class="edu-entry">
+          <div class="edu-row">
+            <span class="edu-school"><strong>{{ edu.school }}</strong></span>
+            <span class="edu-location">{{ edu.location }}</span>
+          </div>
+          {% for deg in edu.degrees %}
+          <div class="edu-row">
+            <span class="edu-degree">{{ deg.degree }}</span>
+            <span class="edu-date">{{ deg.date }}</span>
+          </div>
+          {% endfor %}
+        </div>
+        {% endfor %} {% if education_note %}
+        <p class="section-note">{{ education_note }}</p>
+        {% endif %}
+      </section>
+      {% endif %} {% if publications %}
+      <section>
+        <h2>{{ labels.publications }}</h2>
+        {% for pub in publications %}
+        <p class="pub-item">{{ pub.html | safe }}</p>
+        {% endfor %}
+      </section>
+      {% endif %} {% if research_experience %}
+      <section>
+        <h2>{{ labels.research_experience }}</h2>
+        {% for item in research_experience %} {{ entry_block(item) }} {%
+        endfor %}
+      </section>
+      {% endif %} {% if work_experience %}
+      <section>
+        <h2>{{ labels.work_experience }}</h2>
+        {% for item in work_experience %} {{ entry_block(item) }} {% endfor %}
+      </section>
+      {% endif %} {% if projects %}
+      <section>
+        <h2>{{ labels.projects }}</h2>
+        {% for item in projects %} {{ entry_block(item) }} {% endfor %}
+      </section>
+      {% endif %} {% if competitions %}
+      <section>
+        <h2>{{ labels.competitions }}</h2>
+        <ul class="line-list">
+          {% for c in competitions %}
+          <li>
+            <span class="item-text">{{ c.text }}</span>
+            <span class="item-date">{{ c.date }}</span>
+          </li>
+          {% endfor %}
+        </ul>
+      </section>
+      {% endif %} {% if awards %}
+      <section>
+        <h2>{{ labels.awards }}</h2>
+        <ul class="line-list">
+          {% for a in awards %}
+          <li>
+            <span class="item-text">{{ a.text }}</span>
+            <span class="item-date">{{ a.date }}</span>
+          </li>
+          {% endfor %}
+        </ul>
+      </section>
+      {% endif %} {% if skills %}
+      <section>
+        <h2>{{ labels.skills }}</h2>
+        {% for s in skills %}
+        <p class="skill-line">{{ s }}</p>
+        {% endfor %}
+      </section>
+      {% endif %}
+    </main>
+
+    <script>
+      (function () {
+        const page = document.querySelector(".page");
+        let originals = null;
+
+        function pxPerMm() {
+          const probe = document.createElement("div");
+          probe.style.cssText =
+            "position:absolute;visibility:hidden;width:100mm;";
+          document.body.appendChild(probe);
+          const px = probe.offsetWidth / 100;
+          probe.remove();
+          return px;
+        }
+
+        function sheetPads() {
+          const probe = document.createElement("div");
+          probe.className = "a4-sheet";
+          probe.style.cssText =
+            "position:absolute;visibility:hidden;left:-9999px;top:0;";
+          document.body.appendChild(probe);
+          const cs = getComputedStyle(probe);
+          const pads = {
+            t: parseFloat(cs.paddingTop),
+            b: parseFloat(cs.paddingBottom),
+          };
+          probe.remove();
+          return pads;
+        }
+
+        function fitPageToViewport() {
+          page.style.transform = "none";
+          page.style.transformOrigin = "top left";
+          page.style.height = "";
+          page.style.width = "100%";
+          const sheet = page.querySelector(".a4-sheet");
+          if (!sheet) return;
+
+          const viewportWidth = Math.min(
+            window.innerWidth,
+            document.documentElement.clientWidth
+          );
+          const sheetWidth = sheet.getBoundingClientRect().width;
+          const availableWidth = Math.max(viewportWidth - 24, 240);
+          const scale = Math.min(1, availableWidth / sheetWidth);
+
+          const leftOffset = Math.max(0, (viewportWidth - sheetWidth) / 2);
+          page.querySelectorAll(".a4-sheet").forEach((currentSheet) => {
+            currentSheet.style.marginLeft = `${leftOffset}px`;
+            currentSheet.style.marginRight = "0";
+          });
+          const unscaledHeight = page.scrollHeight;
+          page.style.height = `${unscaledHeight * scale}px`;
+          page.style.transform = `scale(${scale.toFixed(4)})`;
+        }
+
+        function paginate() {
+          page.style.transform = "none";
+          page.style.height = "";
+          page.style.width = "100%";
+          if (!originals) {
+            originals = Array.from(page.children).map((n) => n.cloneNode(true));
+          }
+          page.replaceChildren(...originals.map((n) => n.cloneNode(true)));
+
+          const px = pxPerMm();
+          const pads = sheetPads();
+          const usable = 297 * px - pads.t - pads.b - 2;
+
+          const units = [];
+          Array.from(page.children).forEach((top) => {
+            if (top.tagName === "SECTION") {
+              Array.from(top.children).forEach((child) => {
+                units.push({ el: child, heading: child.tagName === "H2" });
+              });
+            } else {
+              units.push({ el: top, heading: false });
+            }
+          });
+          units.forEach((u) => (u.h = u.el.offsetHeight));
+
+          page.innerHTML = "";
+          let sheet = null;
+          let used = 0;
+          let pendingH2 = null;
+
+          function newSheet() {
+            sheet = document.createElement("div");
+            sheet.className = "a4-sheet";
+            page.appendChild(sheet);
+            used = 0;
+          }
+
+          function contentHeight(sh) {
+            const kids = sh.children;
+            if (!kids.length) return 0;
+            const last = kids[kids.length - 1];
+            return (
+              last.getBoundingClientRect().bottom -
+              sh.getBoundingClientRect().top -
+              pads.t
+            );
+          }
+
+          function appendGroup(els, hEst) {
+            if (!sheet || (used > 0 && used + hEst > usable)) newSheet();
+            const prevCount = sheet.childElementCount;
+            els.forEach((el) => sheet.appendChild(el));
+            if (contentHeight(sheet) > usable && prevCount > 0) {
+              els.forEach((el) => el.remove());
+              newSheet();
+              els.forEach((el) => sheet.appendChild(el));
+            }
+            used = contentHeight(sheet);
+          }
+
+          units.forEach((u) => {
+            if (u.heading) {
+              pendingH2 = u;
+              return;
+            }
+            const els = [];
+            let hEst = u.h;
+            if (pendingH2) {
+              els.push(pendingH2.el);
+              hEst += pendingH2.h + 8;
+              pendingH2 = null;
+            }
+            els.push(u.el);
+            appendGroup(els, hEst);
+          });
+          if (pendingH2 && sheet) sheet.appendChild(pendingH2.el);
+          fitPageToViewport();
+        }
+
+        window.addEventListener("load", paginate);
+        let timer;
+        window.addEventListener("resize", () => {
+          clearTimeout(timer);
+          timer = setTimeout(paginate, 200);
+        });
+      })();
+    </script>
+
+    <script>
+      const exportBtn = document.getElementById("exportBtn");
+      exportBtn.addEventListener("click", () => {
+        exportBtn.disabled = true;
+        exportBtn.textContent = exportBtn.dataset.generatingLabel;
+        fetch("/export-pdf?lang={{ lang }}")
+          .then((resp) => {
+            if (!resp.ok) throw new Error("Export failed");
+            return resp.blob();
+          })
+          .then((blob) => {
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "{{ 'Resume_Chinese.pdf' if lang == 'zh' else 'Resume_English.pdf' }}";
+            a.click();
+            URL.revokeObjectURL(url);
+          })
+          .catch((err) => alert(err.message))
+          .finally(() => {
+            exportBtn.disabled = false;
+            exportBtn.textContent = exportBtn.dataset.defaultLabel;
+          });
+      });
+    </script>
+  </body>
+</html>

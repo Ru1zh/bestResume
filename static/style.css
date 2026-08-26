@@ -1,0 +1,513 @@
+:root {
+  --bg: #ffffff;
+  --panel: #ffffff;
+  --text: #1a1a1a;
+  --subtle: #444444;
+  --line: #333333;
+  --link: #0563c1;
+  --a4-page-padding: 19mm 12mm;
+  --bullet-size: 8pt;
+  --bullet-indent: 16px;
+}
+
+@font-face {
+  font-family: "ResumeChineseMixed";
+  src: local("Source Han Sans SC"), local("Source Han Sans CN"), local("思源黑体");
+  unicode-range:
+    U+3000-303F, U+3400-4DBF, U+4E00-9FFF, U+F900-FAFF, U+FE30-FE6F,
+    U+FF00-FFEF;
+}
+
+@font-face {
+  font-family: "ResumeChineseMixed";
+  src: local("Times New Roman");
+  unicode-range: U+0000-024F, U+1E00-1EFF, U+2000-206F, U+20A0-20CF,
+    U+2100-214F, U+2190-21FF;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Times New Roman", Times, serif;
+  color: var(--text);
+  background: var(--bg);
+  font-size: 10.5pt;
+  line-height: 1.35;
+  -webkit-font-smoothing: antialiased;
+}
+
+html[lang="zh"] body {
+  font-family:
+    "ResumeChineseMixed", "Source Han Sans SC", "Source Han Sans CN", "思源黑体",
+    Arial, sans-serif;
+}
+
+a {
+  color: var(--link);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.page {
+  width: 100%;
+}
+
+/* A4 sheet rendered by pagination JS (screen preview) */
+
+.a4-sheet {
+  width: 210mm;
+  min-height: 297mm;
+  margin: 0 auto 24px;
+  background: var(--panel);
+  padding: var(--a4-page-padding);
+  box-sizing: border-box;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ── Header ── */
+
+.header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 96px;
+  gap: 20px;
+  align-items: start;
+  margin-bottom: 10px;
+}
+
+.header-info {
+  min-width: 0;
+  text-align: left;
+}
+
+.header-photo {
+  width: 96px;
+  height: 128px;
+  justify-self: end;
+  overflow: hidden;
+  border: 1px solid #b9c1ca;
+  border-radius: 2px;
+  background: #f4f5f6;
+}
+
+.header-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.header h1 {
+  font-size: 16pt;
+  font-weight: 700;
+  font-variant: small-caps;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+
+.header .school {
+  font-size: 12pt;
+  margin-bottom: 2px;
+}
+
+.header .contact {
+  font-size: 10.5pt;
+  color: var(--subtle);
+}
+
+/* ── Section headers ── */
+
+h2 {
+  font-size: 14pt;
+  font-weight: normal;
+  font-variant: small-caps;
+  letter-spacing: 0.5px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid var(--line);
+  margin-top: 10px;
+  margin-bottom: 6px;
+}
+
+/* first heading at the top of a sheet needs no extra space (screen only) */
+@media screen {
+  .a4-sheet > h2:first-child {
+    margin-top: 0;
+  }
+}
+
+/* ── Education ── */
+
+/* between schools: 8px — larger than degree spacing (2px), smaller than section gap (14px) */
+.edu-entry {
+  margin-bottom: 8px;
+}
+
+.edu-entry:last-child {
+  margin-bottom: 0;
+}
+
+.edu-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.edu-entry .edu-row + .edu-row {
+  margin-top: 2px;
+}
+
+.edu-school {
+  min-width: 0;
+}
+
+.edu-location {
+  white-space: nowrap;
+  text-align: right;
+}
+
+.edu-degree {
+  min-width: 0;
+  display: flex;
+  align-items: baseline;
+}
+
+.edu-degree::before {
+  content: "\2022";
+  flex: 0 0 var(--bullet-indent);
+  width: var(--bullet-indent);
+  font-size: var(--bullet-size);
+}
+
+.edu-date {
+  white-space: nowrap;
+  text-align: right;
+}
+
+.section-note {
+  font-size: 10.5pt;
+  margin-top: 3px;
+}
+
+/* ── Publications ── */
+
+.pub-item {
+  font-size: 10.5pt;
+  line-height: 1.4;
+  padding-left: 22px;
+  text-indent: -22px;
+  margin-bottom: 3px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.pub-item a {
+  overflow-wrap: anywhere;
+  word-break: break-all;
+}
+
+/* ── Entry blocks (research / internship / projects) ── */
+
+.block {
+  margin-bottom: 10px;
+}
+
+.entry-heading,
+.entry-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  width: 100%;
+}
+
+.entry-title {
+  font-weight: 700;
+}
+
+.entry-title a {
+  color: var(--text);
+}
+
+.entry-title.u,
+.entry-title.u a {
+  text-decoration: underline;
+}
+
+.entry-title a:hover {
+  color: var(--link);
+}
+
+.entry-date {
+  font-size: 10.5pt;
+  white-space: nowrap;
+  text-align: right;
+}
+
+.entry-meta .entry-role {
+  color: var(--subtle);
+}
+
+.entry-subtitle {
+  font-style: italic;
+  font-size: 10.5pt;
+  margin-top: 1px;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 2px;
+}
+
+li {
+  font-size: 10.5pt;
+  margin-bottom: 2px;
+  line-height: 1.35;
+}
+
+ul:not(.line-list) li {
+  position: relative;
+  padding-left: var(--bullet-indent);
+}
+
+ul:not(.line-list) li::before {
+  content: "\2022";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: var(--bullet-size);
+  line-height: inherit;
+}
+
+.tech-stack {
+  font-size: 10.5pt;
+  margin-top: 2px;
+}
+
+/* ── One-line tables (competitions / awards) ── */
+
+/* ── One-line bullet lists (competitions / awards) ── */
+
+.line-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.line-list li {
+  position: relative;
+  padding-left: var(--bullet-indent);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0;
+}
+
+.line-list li::before {
+  content: "\2022";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: var(--bullet-size);
+  line-height: inherit;
+}
+
+.line-list .item-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.line-list .item-date {
+  white-space: nowrap;
+  text-align: right;
+}
+
+/* ── Skills ── */
+
+.skill-line {
+  font-size: 10.5pt;
+  margin-bottom: 2px;
+}
+
+/* ── Editor ── */
+
+.editor-page {
+  width: min(1400px, 96vw);
+  margin: 12px auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  height: calc(100vh - 24px);
+  font-family:
+    "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+
+.editor-panel,
+.preview-panel {
+  background: var(--panel);
+  border: 1px solid #d7e0eb;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  border-bottom: 1px solid #d7e0eb;
+}
+
+.toolbar h1 {
+  margin: 0;
+  font-size: 18px;
+  font-variant: normal;
+}
+
+button {
+  border: none;
+  background: #2878b5;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+textarea {
+  width: 100%;
+  height: calc(100% - 72px);
+  border: none;
+  resize: none;
+  padding: 12px;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+#status {
+  margin: 0;
+  padding: 8px 12px;
+  border-top: 1px solid #d7e0eb;
+  font-size: 13px;
+  color: var(--subtle);
+}
+
+iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* ── Print bar ── */
+
+.print-bar {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  padding: 10px;
+  align-items: center;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.print-bar button {
+  font-size: 14px;
+  padding: 6px 18px;
+}
+
+.print-bar a {
+  font-size: 14px;
+  color: #2878b5;
+  padding: 6px 18px;
+  border: 1px solid #2878b5;
+  border-radius: 8px;
+}
+
+.print-bar a:hover {
+  background: #2878b5;
+  color: white;
+  text-decoration: none;
+}
+
+.print-hint {
+  font-size: 12px;
+  color: #888;
+}
+
+/* ── Print ── */
+
+@page {
+  size: A4;
+  margin: 0;
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: white;
+    font-size: 10.5pt;
+  }
+
+  .page {
+    width: 100%;
+    height: auto !important;
+    margin: 0;
+    padding: 0;
+    min-height: auto;
+    box-shadow: none;
+    transform: none !important;
+    transform-origin: initial !important;
+  }
+
+  .a4-sheet {
+    width: 210mm;
+    height: 297mm;
+    min-height: 297mm;
+    margin: 0 !important;
+    padding: var(--a4-page-padding);
+    box-shadow: none;
+    break-after: page;
+    page-break-after: always;
+  }
+
+  .a4-sheet:last-child {
+    break-after: auto;
+    page-break-after: auto;
+  }
+
+  a {
+    color: inherit !important;
+  }
+
+  .entry-title.u,
+  .entry-title.u a {
+    text-decoration: underline;
+  }
+
+  h2 {
+    break-after: avoid;
+  }
+
+  .block,
+  .edu-entry,
+  li,
+  tr {
+    break-inside: avoid;
+  }
+}
+
+@media screen {
+  body {
+    background: #e8e8e8;
+    overflow-x: hidden;
+  }
+}

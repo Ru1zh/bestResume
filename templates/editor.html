@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="{{ lang }}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>bestResume - {{ labels.yaml_editor }}</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <main class="editor-page">
+      <section class="editor-panel">
+        <div class="toolbar">
+          <h1>{{ labels.yaml_editor }}</h1>
+          <div>
+            <button id="saveBtn">{{ labels.save_yaml }}</button>
+            <a id="previewLink" href="/resume?lang={{ lang }}">{{ labels.open_preview }}</a>
+          </div>
+        </div>
+        <textarea id="yamlInput">{{ yaml_text }}</textarea>
+        <p id="status"></p>
+      </section>
+      <section class="preview-panel">
+        <iframe
+          id="previewFrame"
+          src="/resume?lang={{ lang }}&editor_context=1"
+          title="{{ labels.resume_preview }}"
+        ></iframe>
+      </section>
+    </main>
+
+    <script>
+      const saveBtn = document.getElementById("saveBtn");
+      const yamlInput = document.getElementById("yamlInput");
+      const statusText = document.getElementById("status");
+      const previewFrame = document.getElementById("previewFrame");
+
+      function refreshPreview() {
+        previewFrame.src = "/resume?lang={{ lang }}&editor_context=1&t=" + Date.now();
+      }
+
+      saveBtn.addEventListener("click", async () => {
+        statusText.textContent = "{{ labels.saving }}";
+        try {
+          const resp = await fetch("/api/resume/raw?lang={{ lang }}", {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ yaml_text: yamlInput.value }),
+          });
+          const data = await resp.json();
+          if (!resp.ok) throw new Error(data.detail || "Save failed");
+          statusText.textContent = "{{ labels.saved_preview }}";
+          refreshPreview();
+        } catch (err) {
+          statusText.textContent = "{{ labels.save_failed }}" + err.message;
+        }
+      });
+
+      document.addEventListener("keydown", function (e) {
+        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "s") {
+          e.preventDefault();
+          saveBtn.click();
+        }
+      });
+    </script>
+  </body>
+</html>

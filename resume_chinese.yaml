@@ -1,0 +1,67 @@
+basics:
+  name: 奶豪
+  school: 奶龙大学
+  position: "世界模型研究工程师"
+  phone: "+666 8888-6666"
+  email: naihao.demo@example.com
+  linkedin: "https://www.linkedin.com/in/naihao-demo"
+  github: "https://github.com/naihao-demo"
+  homepage: "https://www.google.com"
+  photo: "/img/奶龙证件照.jpg"
+
+education:
+  - school: "奶龙大学"
+    location: "奶龙国奶龙市"
+    degrees:
+      - degree: "计算机科学理学硕士"
+        date: "2024年9月 - 2026年8月"
+      - degree: "计算机科学理学学士"
+        date: "2020年9月 - 2024年6月"
+
+publications:
+  - style: ieee
+    authors:
+      - N. Hao
+      - R. Vega
+      - S. Ito
+    title: "A compositional world model for open-ended environment prediction"
+    type: journal
+    container_title: "Nature"
+    year: 2026
+
+research_experience:
+  - name: "面向长时序模拟的组合式世界模型"
+    date: "2026年1月 - 2026年4月"
+    highlights:
+      - "设计潜在动力学世界模型，预测未来观测和动作，并拆分物体、运动与交互表示，提升对未见场景布局的组合泛化能力。"
+      - "使用重建、奖励预测和规划指标评估多步滚动结果，并构建可复现的训练与可视化流程，对比模型想象轨迹和环境实际运行轨迹。"
+    tech_stack: "Python, PyTorch, Transformer, latent dynamics, Hydra"
+
+work_experience:
+  - name: "数据平台工程实习"
+    date: "2025年6月 - 2025年8月"
+    company: "北辰数据实验室"
+    role: "数据工程实习生"
+    highlights:
+      - "为内部分析平台准备批量数据导入任务、数据质量检查和技术文档。"
+
+projects:
+  - name: "世界模型评测实验室"
+    date: "2025年3月 - 2025年6月"
+    highlights:
+      - "创建评测仪表盘，对比不同世界模型变体的预测准确率、滚动稳定性和规划结果。"
+      - "加入可配置随机种子、轨迹回放和 JSON 导出功能，支持可重复的实验复核。"
+    tech_stack: "Python, FastAPI, SQLite, Plotly"
+
+competitions:
+  - text: "开放数据可持续发展挑战赛决赛入围"
+    date: "2025年10月"
+
+awards:
+  - text: "奶龙大学学业优秀奖学金"
+    date: "2026年"
+
+skills:
+  - "编程语言：Python, C++, SQL, JavaScript"
+  - "世界模型与机器学习：PyTorch, Transformers, latent dynamics, RL"
+  - "系统与工具：FastAPI, Docker, PostgreSQL, Git, Linux"

@@ -1,0 +1,67 @@
+basics:
+  name: Nai Hao
+  school: Nailong University
+  position: "World Model Research Engineer"
+  phone: "+666 8888-6666"
+  email: naihao.demo@example.com
+  linkedin: "https://www.linkedin.com/in/naihao-demo"
+  github: "https://github.com/naihao-demo"
+  homepage: "https://www.naihao-demo.com"
+  photo: "/img/奶龙证件照.jpg"
+
+education:
+  - school: "Nailong University"
+    location: "Nailong Country, Nailong City"
+    degrees:
+      - degree: "M.Sc. in Computer Science"
+        date: "Sep. 2024 - Aug. 2026"
+      - degree: "B.Sc. in Computer Science"
+        date: "Sep. 2020 - Jun. 2024"
+
+publications:
+  - style: ieee
+    authors:
+      - N. Hao
+      - R. Vega
+      - S. Ito
+    title: "A compositional world model for open-ended environment prediction"
+    type: journal
+    container_title: "Nature"
+    year: 2026
+
+research_experience:
+  - name: "Compositional World Model for Long-Horizon Simulation"
+    date: "Jan. 2026 - Apr. 2026"
+    highlights:
+      - "Designed a latent-dynamics world model that predicts future observations and actions, separating object, motion, and interaction representations to improve compositional generalization to unseen scene layouts."
+      - "Evaluated multi-step rollouts with reconstruction, reward-prediction, and planning metrics, and built a reproducible training and visualization pipeline for comparing imagined trajectories with environment rollouts."
+    tech_stack: "Python, PyTorch, Transformer, latent dynamics, Hydra"
+
+work_experience:
+  - name: "Data Platform Engineering Intern"
+    date: "Jun. 2025 - Aug. 2025"
+    company: "Northstar Analytics Lab"
+    role: "Data Engineering Intern"
+    highlights:
+      - "Prepared batch ingestion jobs, data-quality checks, and documentation for an internal analytics platform."
+
+projects:
+  - name: "World Model Evaluation Lab"
+    date: "Mar. 2025 - Jun. 2025"
+    highlights:
+      - "Created a benchmark dashboard for comparing predictive accuracy, rollout stability, and planning outcomes across world-model variants."
+      - "Added configurable seed control, trajectory replay, and JSON export for repeatable experiment review."
+    tech_stack: "Python, FastAPI, SQLite, Plotly"
+
+competitions:
+  - text: "Finalist, Open Data Sustainability Challenge"
+    date: "Oct. 2025"
+
+awards:
+  - text: "Academic Excellence Scholarship, Nailong University"
+    date: "2026"
+
+skills:
+  - "Programming Languages: Python, C++, SQL, JavaScript"
+  - "World Models & Machine Learning: PyTorch, Transformers, latent dynamics, reinforcement learning"
+  - "Systems & Tools: FastAPI, Docker, PostgreSQL, Git, Linux"

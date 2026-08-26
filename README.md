@@ -11,7 +11,7 @@
 - 浏览器内编辑 YAML
 - 中英文版本切换
 - A4 页面分页预览
-- 一键导出 PDF
+- 使用浏览器打印并保存为 PDF
 - IEEE、APA、MLA 文献引用格式
 - Windows、macOS、Linux 启动方式
 
@@ -107,9 +107,9 @@ start_mac.sh          <- macOS 启动脚本
 start_linux.sh        <- Linux 启动脚本
 ```
 
-## PDF 导出
+## 打印
 
-点击预览页面顶部的“导出 PDF”按钮即可生成 PDF。系统需要安装 Microsoft Edge 或 Google Chrome。
+点击预览页面顶部的“打印”按钮。在浏览器打印对话框中选择“保存为 PDF”即可生成 PDF。
 
 ## API
 
@@ -117,7 +117,6 @@ start_linux.sh        <- Linux 启动脚本
 |---|---|---|
 | `GET` | `/resume` | 简历预览 |
 | `GET` | `/editor` | YAML 编辑器 |
-| `GET` | `/export-pdf` | 导出 PDF |
 | `GET` | `/api/resume` | 获取简历 JSON |
 | `PUT` | `/api/resume` | 保存简历 JSON |
 | `GET` | `/api/resume/raw` | 获取原始 YAML |

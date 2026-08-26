@@ -41,12 +41,8 @@
   </head>
   <body>
     <div class="print-bar no-print">
-      <button
-        id="exportBtn"
-        data-default-label="{{ labels.export_pdf }}"
-        data-generating-label="{{ labels.generating }}"
-      >
-        {{ labels.export_pdf }}
+      <button id="printBtn" type="button">
+        {{ "Print" if lang == "en" else "打印" }}
       </button>
       <a href="/editor?lang={{ lang }}"{% if editor_context %} target="_top"{% endif %}>{{ labels.edit_yaml }}</a>
       <span class="language-links"
@@ -329,28 +325,10 @@
     </script>
 
     <script>
-      const exportBtn = document.getElementById("exportBtn");
-      exportBtn.addEventListener("click", () => {
-        exportBtn.disabled = true;
-        exportBtn.textContent = exportBtn.dataset.generatingLabel;
-        fetch("/export-pdf?lang={{ lang }}")
-          .then((resp) => {
-            if (!resp.ok) throw new Error("Export failed");
-            return resp.blob();
-          })
-          .then((blob) => {
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement("a");
-            a.href = url;
-            a.download = "{{ 'Resume_Chinese.pdf' if lang == 'zh' else 'Resume_English.pdf' }}";
-            a.click();
-            URL.revokeObjectURL(url);
-          })
-          .catch((err) => alert(err.message))
-          .finally(() => {
-            exportBtn.disabled = false;
-            exportBtn.textContent = exportBtn.dataset.defaultLabel;
-          });
+      const printBtn = document.getElementById("printBtn");
+
+      printBtn.addEventListener("click", () => {
+        window.print();
       });
     </script>
   </body>

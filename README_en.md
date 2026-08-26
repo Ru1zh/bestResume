@@ -11,7 +11,7 @@ This project is based on [easyCV](https://github.com/lvy010/easyCV). It is a YAM
 - In-browser YAML editing
 - English/Chinese language switching
 - A4 page pagination
-- One-click PDF export
+- Browser print dialog for saving as PDF
 - IEEE, APA, and MLA publication styles
 - Windows, macOS, and Linux launchers
 
@@ -107,9 +107,9 @@ start_mac.sh          <- macOS launcher
 start_linux.sh        <- Linux launcher
 ```
 
-## PDF Export
+## Printing
 
-Click the “Export PDF” button at the top of the preview page. Microsoft Edge or Google Chrome is required.
+Click the “Print” button at the top of the preview page. In the browser print dialog, choose “Save to PDF” if you want a PDF file. No special browser installation is required.
 
 ## API
 
@@ -117,7 +117,6 @@ Click the “Export PDF” button at the top of the preview page. Microsoft Edge
 |---|---|---|
 | `GET` | `/resume` | Resume preview |
 | `GET` | `/editor` | YAML editor |
-| `GET` | `/export-pdf` | Export PDF |
 | `GET` | `/api/resume` | Get resume JSON |
 | `PUT` | `/api/resume` | Save resume JSON |
 | `GET` | `/api/resume/raw` | Get raw YAML |

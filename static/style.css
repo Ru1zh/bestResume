@@ -86,6 +86,14 @@ a:hover {
   text-align: left;
 }
 
+.header--no-photo {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.header--no-photo .header-info {
+  text-align: center;
+}
+
 .header-photo {
   width: 96px;
   height: 128px;

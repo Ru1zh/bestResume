@@ -37,7 +37,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ basics.name }} - {{ labels.resume }}</title>
-    <link rel="stylesheet" href="/static/style.css?v=13" />
+    <link rel="stylesheet" href="/static/style.css?v=14" />
   </head>
   <body>
     <div class="print-bar no-print">
@@ -56,7 +56,7 @@
     </div>
 
     <main class="page">
-      <header class="header">
+      <header class="header{% if not basics.photo %} header--no-photo{% endif %}">
         <div class="header-info">
           <h1>{{ basics.name }}</h1>
           <p class="school">{{ basics.school }}</p>
@@ -69,6 +69,13 @@
               >{{ basics.email }}</a
             >
           </p>
+          {% if not basics.photo %}
+          {% if basics.linkedin or basics.github or basics.homepage %}
+          <p class="contact social-links">
+            {% if basics.linkedin %}<a href="{{ basics.linkedin }}" target="_blank" rel="noreferrer">{{ labels.linkedin }}</a>{% endif %}{% if basics.github %}{% if basics.linkedin %} | {% endif %}<a href="{{ basics.github }}" target="_blank" rel="noreferrer">{{ labels.github }}</a>{% endif %}{% if basics.homepage %}{% if basics.linkedin or basics.github %} | {% endif %}<a href="{{ basics.homepage }}" target="_blank" rel="noreferrer">{{ labels.homepage }}</a>{% endif %}
+          </p>
+          {% endif %}
+          {% else %}
           {% if basics.linkedin %}
           <p class="contact">
             {{ labels.linkedin }}：<a
@@ -94,6 +101,7 @@
               >{{ basics.homepage }}</a
             >{% endif %}
           </p>
+          {% endif %}
           {% endif %}
         </div>
         {% if basics.photo %}

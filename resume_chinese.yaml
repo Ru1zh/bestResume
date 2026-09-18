@@ -7,7 +7,7 @@ basics:
   linkedin: "https://www.linkedin.com/in/naihao-demo"
   github: "https://github.com/naihao-demo"
   homepage: "https://www.google.com"
-  photo: "/img/奶龙证件照.jpg"
+  # photo: "/img/奶龙证件照.jpg"
 
 education:
   - school: "奶龙大学"

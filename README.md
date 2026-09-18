@@ -74,6 +74,47 @@ chmod +x start_linux.sh
 
 也可以打开对应语言的 YAML 编辑器，在浏览器中修改并保存。
 
+## 照片与无照片模式
+
+简历会根据 `basics.photo` 是否存在自动切换页首布局。
+
+### 有照片模式
+
+保留 `photo` 字段时，基本信息显示在左侧，照片显示在右侧：
+
+```yaml
+basics:
+  photo: "/img/奶龙证件照.jpg"
+```
+
+LinkedIn、GitHub 和个人主页会沿用详细显示方式，同时显示名称和完整网址。
+
+### 无照片模式
+
+不需要照片时，可以注释或删除 `photo` 字段：
+
+```yaml
+basics:
+  # photo: "/img/奶龙证件照.jpg"
+```
+
+无照片模式下：
+
+- 姓名、学校、求职方向和联系方式整体居中。
+- LinkedIn、GitHub 和个人主页合并为一行，例如 `LinkedIn | GitHub | 个人主页`。
+- 页面只显示链接名称，不显示完整网址；点击名称后会在新标签页打开对应页面。
+- 缺少某个链接字段时会自动隐藏该项，并调整分隔符。
+
+#### 中文无照片简历
+
+![中文无照片简历示意图](example/Resume_Chinese_NoPhoto.jpg)
+
+#### 英文无照片简历
+
+![英文无照片简历示意图](example/Resume_English_NoPhoto.jpg)
+
+修改 YAML 并保存后，刷新简历预览即可看到对应布局。
+
 ## 文献引用
 
 文献使用结构化 YAML 字段，每条文献可以单独选择 `ieee`、`apa` 或 `mla`：

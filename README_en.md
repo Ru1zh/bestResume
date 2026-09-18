@@ -74,6 +74,47 @@ You can edit the language-specific YAML files directly:
 
 You can also open the corresponding YAML editor in the browser, edit the content, and save it.
 
+## Photo and No-Photo Modes
+
+The resume automatically switches its header layout based on whether `basics.photo` is present.
+
+### Photo Mode
+
+Keep the `photo` field to display the basic information on the left and the photo on the right:
+
+```yaml
+basics:
+  photo: "/img/奶龙证件照.jpg"
+```
+
+LinkedIn, GitHub, and the personal website use the detailed layout, showing both their labels and full URLs.
+
+### No-Photo Mode
+
+Comment out or remove the `photo` field when a photo is not needed:
+
+```yaml
+basics:
+  # photo: "/img/奶龙证件照.jpg"
+```
+
+In no-photo mode:
+
+- The name, school, target position, and contact details are centered as a group.
+- LinkedIn, GitHub, and the personal website are combined into one row, such as `LinkedIn | GitHub | Personal Website`.
+- Only the link labels are visible. Clicking a label opens its URL in a new tab.
+- If a link field is missing, that item is hidden and the separators adjust automatically.
+
+#### Chinese Resume Without a Photo
+
+![Chinese resume without a photo](example/Resume_Chinese_NoPhoto.jpg)
+
+#### English Resume Without a Photo
+
+![English resume without a photo](example/Resume_English_NoPhoto.jpg)
+
+Save the YAML file and refresh the resume preview to display the corresponding layout.
+
 ## Publications
 
 Publications use structured YAML fields. Each entry can select `ieee`, `apa`, or `mla`:
